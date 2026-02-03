@@ -8,10 +8,10 @@ public static class SubtitleDispatcher
 {
     static SubtitleDispatcher()
     {
-        EventRelay.OnIdentifierTriggered += FindAndSendSubtitle;
+        EventRelay.OnIdentifierTriggered += ProcessSignal;
     }
 
-    public static void FindAndSendSubtitle(string identifier)
+    public static void ProcessSignal(string identifier)
     {
         SubtitleManager.ShowSubtitle(identifier);
     }

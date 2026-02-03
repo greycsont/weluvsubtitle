@@ -7,7 +7,8 @@ public static class RevolverPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Revolver.Shoot))]
-    public static void ShootPatch(ref int shotType)
+    public static void ShootPatch(ref int shotType,
+    							  Revolver __instance)
     {
         switch (shotType)
         {
