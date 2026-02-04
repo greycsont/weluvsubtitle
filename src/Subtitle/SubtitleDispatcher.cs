@@ -1,4 +1,6 @@
-﻿using UnityEngine.EventSystems;
+﻿using System.Collections.Generic;
+using UnityEngine;
+
 using weluvsubtitle.Relay;
 
 
@@ -11,8 +13,9 @@ public static class SubtitleDispatcher
         EventRelay.OnIdentifierTriggered += ProcessSignal;
     }
 
-    public static void ProcessSignal(string identifier)
+    public static void ProcessSignal(string id, Vector3 pos = default)
     {
-        SubtitleManager.ShowSubtitle(identifier);
+        SubtitleProvider.GetContent(id, out var text);
+        SubtitleDisplay.ShowSubtitle(text ?? id);
     }
 }

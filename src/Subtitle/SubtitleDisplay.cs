@@ -7,7 +7,7 @@ using weluvsubtitle.Util;
 
 namespace weluvsubtitle.Subtitle;
 
-public static class SubtitleManager
+public static class SubtitleDisplay
 {
     private static Canvas _canvas;
     private static GameObject _container;
