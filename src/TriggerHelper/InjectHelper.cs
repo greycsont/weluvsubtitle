@@ -1,28 +1,48 @@
 using UnityEngine;
 
 
-namespace weluvsubtitle.TriggerPatches;
+namespace weluvsubtitle.TriggerHelper;
 
 public static class InjectHelper
 {
     public static void InjectObserver(GameObject prefab, string id)
     {
+        Plugin.log.LogInfo($"给{prefab.name}挂{id}");
         if (prefab == null) return;
 
-        // 拿到 AudioSource，没这个就没法监控
         var source = prefab.GetComponent<AudioSource>();
         if (source == null) return;
 
-        // 挂载你的监控脚本
         var observer = prefab.GetComponent<AudioPlayObserver>();
         if (observer == null)
         {
             observer = prefab.AddComponent<AudioPlayObserver>();
         }
-        observer.signalId = id;
+        observer.id = id;
+        
+        Plugin.log.LogInfo("挂好了");
+
+    }
     
-        // 强制把这个 AudioSource 设为 3D 声音，否则你的 Vector3 坐标没意义
-        // (虽然 ULTRAKILL 默认通常就是 3D 的)
-        //source.spatialBlend = 1.0f; 
+    public static void InjectObserver(Component target, string id)
+    {
+        if (target == null) return;
+        
+        GameObject prefabObj = target.gameObject;
+    
+        Plugin.log.LogInfo($"给{prefabObj.name}挂{id}");
+
+        var source = prefabObj.GetComponent<AudioSource>();
+        if (source == null) 
+        {
+            Plugin.log.LogWarning($"{prefabObj.name} 上找不到 AudioSource");
+            return;
+        }
+
+        var observer = prefabObj.GetComponent<AudioPlayObserver>() 
+                       ?? prefabObj.AddComponent<AudioPlayObserver>();
+    
+        observer.id = id;
+        Plugin.log.LogInfo("挂好了");
     }
 }

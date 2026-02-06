@@ -1,13 +1,12 @@
 ﻿using System;
 
 using UnityEngine;
+using weluvsubtitle.Subtitle;
 
 namespace weluvsubtitle.Relay;
 
 
 public static class EventRelay
 {
-    public static event Action<string, Vector3> OnIdentifierTriggered;
-
-    public static void Emit(string id, Vector3 pos) => OnIdentifierTriggered?.Invoke(id, pos);
+    public static void Emit(string id, Vector3 pos) => SubtitleDispatcher.ProcessSignal(id, pos);
 }

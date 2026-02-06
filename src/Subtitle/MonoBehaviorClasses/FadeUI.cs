@@ -7,9 +7,9 @@ namespace weluvsubtitle.Subtitle.MonoBehaviorClasses;
 [RequireComponent(typeof(CanvasGroup))]
 public class FadeUI : MonoBehaviour
 {
-    public float lifeTime = 5f;
+    public float lifeTime = 3f;
     
-    public float delay = 2f;
+    public float delay = 1.5f;
     
     public float updateInterval = 0.2f;
 

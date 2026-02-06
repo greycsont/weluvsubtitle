@@ -21,7 +21,7 @@ public static class SubtitleDisplay
     {
         get
         {
-            if (_container == null)
+            if (_container is null)
             {
                 _container = new GameObject("SubtitleContainer");
                 _container.transform.SetParent(Canvas.transform, false);
@@ -36,7 +36,7 @@ public static class SubtitleDisplay
         // 1. 检查是否已经存在相同的字幕
         if (ActiveSubtitles.TryGetValue(text, out var existingBox))
         {
-            if (existingBox != null)
+            if (existingBox is not null)
             {
                 // 刷新现有的字幕（比如重置它的生命周期/计时器）
                 existingBox.fadeUI.Refresh(); 

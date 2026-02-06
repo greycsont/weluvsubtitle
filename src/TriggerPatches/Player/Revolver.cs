@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace weluvsubtitle.Patches;
+namespace weluvsubtitle.TriggerPatches.Player;
 
 [HarmonyPatch(typeof(Revolver))]
 public static class RevolverPatch
@@ -13,6 +13,7 @@ public static class RevolverPatch
         switch (shotType)
         {
             case 0:
+                
                 break;
             case 1 :
                 break;
