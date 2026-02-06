@@ -39,8 +39,9 @@ public static class Id
             public const string shootSaw = prefix + "shoot_saw";
             public const string shootNail = prefix + "shoot_nail";
             public const string shootZapper = prefix + "shoot_zapper";
-            public const string shootSuperSaw = prefix + "shoot_super_saw";
-            public const string shootBurstNail = prefix + "shoot_burst_nail";
+            public const string superSaw = prefix + "super_saw";
+            public const string burstFire = prefix + "burst_nail";
+            public const string shootMagnet = prefix + "shoot_magnet";
         }
     }
 
