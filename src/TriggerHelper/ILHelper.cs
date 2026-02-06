@@ -12,6 +12,8 @@ public static class ILHelper
 {
     private static IEnumerable<CodeInstruction> EmitPositionWithStrId(string id)
     {
+        Plugin.log.LogInfo($"Emitting trigger with id: {id}");
+        
         yield return new CodeInstruction(OpCodes.Ldstr, id);
 
         yield return new CodeInstruction(OpCodes.Ldarg_0);

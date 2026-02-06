@@ -43,6 +43,13 @@ public static class Id
             public const string burstFire = prefix + "burst_nail";
             public const string shootMagnet = prefix + "shoot_magnet";
         }
+
+        public static class Shotgun
+        {
+            public const string prefix = Player.prefix + "shotgun.";
+            public const string shoot = prefix + "shoot";
+            public const string shootEject = prefix + "shoot_eject";
+        }
     }
 
     public static class Enemy
@@ -52,6 +59,7 @@ public static class Id
 
     public static class Environment
     {
-        
+        public const string prefix = "environment.";
+        public const string explosion = prefix + "explosion";
     }
 }

@@ -19,27 +19,27 @@ public static class RocketPatch
     }
     
     [HarmonyTranspiler]
-    [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.Shoot))]
+    [HarmonyPatch(nameof(RocketLauncher.Shoot))]
     public static IEnumerable<CodeInstruction> ShootTranspiler(IEnumerable<CodeInstruction> instructions)
         => ILHelper.WrapWithPositionEmit(instructions, Id.Player.Rocket.shoot);
 
     [HarmonyTranspiler]
-    [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.ShootCannonball))]
+    [HarmonyPatch(nameof(RocketLauncher.ShootCannonball))]
     public static IEnumerable<CodeInstruction> ShootCannonballTranspiler(IEnumerable<CodeInstruction> instructions)
         => ILHelper.WrapWithPositionEmit(instructions, Id.Player.Rocket.shootCannonball);
 
     [HarmonyTranspiler]
-    [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.FreezeRockets))]
+    [HarmonyPatch(nameof(RocketLauncher.FreezeRockets))]
     public static IEnumerable<CodeInstruction> FreezeRocketsTranspiler(IEnumerable<CodeInstruction> instructions)
         => ILHelper.WrapWithPositionEmit(instructions, Id.Player.Rocket.freezeRockets);
 
     [HarmonyTranspiler]
-    [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.UnfreezeRockets))]
+    [HarmonyPatch(nameof(RocketLauncher.UnfreezeRockets))]
     public static IEnumerable<CodeInstruction> UnfreezeRocketsTranspiler(IEnumerable<CodeInstruction> instructions)
         => ILHelper.WrapWithPositionEmit(instructions, Id.Player.Rocket.unfreezeRockets);
 
     [HarmonyTranspiler]
-    [HarmonyPatch(typeof(RocketLauncher), nameof(RocketLauncher.ShootNapalm))]
+    [HarmonyPatch(nameof(RocketLauncher.ShootNapalm))]
     public static IEnumerable<CodeInstruction> ShootNapalmTranspiler(IEnumerable<CodeInstruction> instructions)
         => ILHelper.WrapWithPositionEmit(instructions, Id.Player.Rocket.shootNapalm);
 }

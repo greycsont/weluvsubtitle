@@ -25,6 +25,7 @@ public static class NailgunAndSawblade
     public static IEnumerable<CodeInstruction> SuperSawTranspiler(IEnumerable<CodeInstruction> instructions)
         => ILHelper.WrapWithPositionEmit(instructions, Id.Player.Nailgun.superSaw);
     
+    // 这个没用？
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(Nailgun.BurstFire))]
     public static IEnumerable<CodeInstruction> BurstFireTranspiler(IEnumerable<CodeInstruction> instructions)
