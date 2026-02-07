@@ -3,17 +3,18 @@ using HarmonyLib;
 
 using weluvsubtitle.Relay;
 using weluvsubtitle.TriggerHelper;
+using weluvsubtitle.Attributes;
 
 namespace weluvsubtitle.TriggerPatches.Player;
 
-
+[PatchOnEntry]
 [HarmonyPatch(typeof(Railcannon))]
 public static class RailcannonPatch
 {
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(Railcannon.Shoot))]
     public static IEnumerable<CodeInstruction> ShootTranspiler(IEnumerable<CodeInstruction> instructions)
-        => ILHelper.WrapWithAction(instructions, AccessTools.Method(typeof(RailcannonPatch), nameof(ShootPatch)));
+        => ILHelper.WrapWithActionAtStart(instructions, AccessTools.Method(typeof(RailcannonPatch), nameof(ShootPatch)));
 
     public static void ShootPatch(Railcannon __instance)
     {
@@ -32,6 +33,7 @@ public static class RailcannonPatch
     }
 }
 
+[PatchOnEntry]
 [HarmonyPatch(typeof(WeaponCharges))]
 public static class WeaponChargesPatch
 {

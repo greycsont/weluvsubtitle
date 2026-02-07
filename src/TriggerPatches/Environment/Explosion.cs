@@ -3,9 +3,11 @@ using HarmonyLib;
 
 using weluvsubtitle.TriggerHelper;
 using weluvsubtitle.Relay;
+using weluvsubtitle.Attributes;
 
 namespace weluvsubtitle.TriggerPatches.Environment;
 
+[PatchOnEntry]
 [HarmonyPatch(typeof(Explosion))]
 public static class ExplosionPatch
 {

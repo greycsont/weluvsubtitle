@@ -1,8 +1,11 @@
 ﻿using GameConsole;
 using HarmonyLib;
 
+using weluvsubtitle.Attributes;
+
 namespace weluvsubtitle.Commands;
 
+[PatchOnEntry]
 [HarmonyPatch(typeof(Console))]
 public class ConsolePatcher
 {

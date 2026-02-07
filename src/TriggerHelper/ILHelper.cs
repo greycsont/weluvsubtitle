@@ -36,16 +36,36 @@ public static class ILHelper
             .InstructionEnumeration();
     }
 
-    public static IEnumerable<CodeInstruction> WrapWithAction(
+    public static IEnumerable<CodeInstruction> WrapWithActionAtStart(
         IEnumerable<CodeInstruction> instructions, 
-        MethodInfo targetMethod)
+        MethodInfo method, 
+        params CodeInstruction[] args)
     {
+        var codes = new List<CodeInstruction>();
+        if (args != null) codes.AddRange(args);
+        codes.Add(new CodeInstruction(OpCodes.Ldarg_0));
+        codes.Add(new CodeInstruction(OpCodes.Call, method));
+
         return new CodeMatcher(instructions)
             .Start()
-            .Insert(
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Call, targetMethod)
-            )
+            .Insert(codes)
+            .InstructionEnumeration();
+    }
+
+    public static IEnumerable<CodeInstruction> WrapWithActionAtEnd(
+        IEnumerable<CodeInstruction> instructions, 
+        MethodInfo method, 
+        params CodeInstruction[] args)
+    {
+        var codes = new List<CodeInstruction>();
+        if (args != null) codes.AddRange(args);
+        codes.Add(new CodeInstruction(OpCodes.Ldarg_0));
+        codes.Add(new CodeInstruction(OpCodes.Call, method));
+
+        return new CodeMatcher(instructions)
+            .End()
+            .MatchForward(false, new CodeMatch(OpCodes.Ret))
+            .Insert(codes)
             .InstructionEnumeration();
     }
 }

@@ -2,7 +2,11 @@
 using BepInEx.Logging;
 using UnityEngine;
 using HarmonyLib;
-
+using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using weluvsubtitle.Attributes;
 using weluvsubtitle.Subtitle;
 
 namespace weluvsubtitle;
@@ -11,8 +15,6 @@ namespace weluvsubtitle;
 public class Plugin : BaseUnityPlugin
 {
     internal static ManualLogSource log { get; private set; } = null;
-
-    private static Harmony _harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
         
     private void Awake()
     {
@@ -30,5 +32,23 @@ public class Plugin : BaseUnityPlugin
     }
 
     private void PatchHarmony()
-        => _harmony.PatchAll();
+    { 
+        var harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
+
+        foreach (var type in typeof(Plugin).Assembly.GetTypes())
+        {
+            if (type.GetCustomAttribute<PatchOnEntryAttribute>() != null)
+            {
+                try
+                {
+                    harmony.PatchAll(type);
+                }
+                catch (Exception e)
+                {
+                    Plugin.log.LogError($"FUCK PATCHING {type.Name}, {e}");
+                    throw;
+                }
+            }
+        }
+    }
 }

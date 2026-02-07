@@ -3,17 +3,19 @@ using HarmonyLib;
 
 using weluvsubtitle.Relay;
 using weluvsubtitle.TriggerHelper;
+using weluvsubtitle.Attributes;
 
 
 namespace weluvsubtitle.TriggerPatches.Player;
 
+[PatchOnEntry]
 [HarmonyPatch(typeof(Nailgun))]
 public static class NailgunAndSawblade
 {
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(Nailgun.Shoot))]
     public static IEnumerable<CodeInstruction> ShootTranspiler(IEnumerable<CodeInstruction> instructions)
-        => ILHelper.WrapWithAction(instructions, AccessTools.Method(typeof(NailgunAndSawblade), nameof(ShootPatch)));   
+        => ILHelper.WrapWithActionAtStart(instructions, AccessTools.Method(typeof(NailgunAndSawblade), nameof(ShootPatch)));   
 
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(Nailgun.ShootZapper))]

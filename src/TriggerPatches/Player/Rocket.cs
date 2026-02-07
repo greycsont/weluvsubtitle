@@ -4,9 +4,11 @@ using HarmonyLib;
 
 using weluvsubtitle.TriggerHelper;
 using weluvsubtitle.Relay;
+using weluvsubtitle.Attributes;
 
 namespace weluvsubtitle.TriggerPatches.Player;
 
+[PatchOnEntry]
 [HarmonyPatch(typeof(RocketLauncher))]
 public static class RocketPatch
 {

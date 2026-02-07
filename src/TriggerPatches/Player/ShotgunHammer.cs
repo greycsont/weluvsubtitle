@@ -3,9 +3,11 @@ using HarmonyLib;
 
 using weluvsubtitle.Relay;
 using weluvsubtitle.TriggerHelper;
+using weluvsubtitle.Attributes;
 
 namespace weluvsubtitle.TriggerPatches.Player;
 
+[PatchOnEntry]
 [HarmonyPatch(typeof(ShotgunHammer))]
 public static class ShotgunHammerPatch
 {
@@ -29,17 +31,23 @@ public static class ShotgunHammerPatch
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(ShotgunHammer.Pump))]
     public static IEnumerable<CodeInstruction> PumpTranspiler(IEnumerable<CodeInstruction> instructions)
-        => ILHelper.WrapWithAction(instructions, AccessTools.Method(typeof(ShotgunHammerPatch), nameof(PumpPatch)));
+        => ILHelper.WrapWithActionAtEnd(instructions, AccessTools.Method(typeof(ShotgunHammerPatch), nameof(PumpPatch)));
+    
+    //[HarmonyTranspiler]
+    //[HarmonyPatch(nameof(ShotgunHammer.DeliverDamage))]
 
     public static void PumpPatch(ShotgunHammer __instance)
     {
         switch (__instance.primaryCharge)
         {
-            case 0:
+            case 1:
                 EventRelay.Emit(Id.Player.ShotgunHammer.pumpLevel1, __instance.transform.position);
                 break;
-            case 1:
+            case 2:
                 EventRelay.Emit(Id.Player.ShotgunHammer.pumpLevel2, __instance.transform.position);
+                break;
+            case 3:
+                EventRelay.Emit(Id.Player.ShotgunHammer.pumpLevel3, __instance.transform.position);
                 break;
             default:
                 EventRelay.Emit(Id.Player.ShotgunHammer.pumpLevel3, __instance.transform.position);

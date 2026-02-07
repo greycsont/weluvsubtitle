@@ -65,6 +65,16 @@ public static class Id
             public const string pumpLevel2 = prefix + "pump_level2";
             public const string pumpLevel3 = prefix + "pump_level3";
         }
+
+        public static class Revolver
+        {
+            public const string prefix =  Player.prefix + "revolver.";
+            public const string shootBeam = prefix + "shoot_beam";
+            public const string shootPiercerBeam = prefix + "shoot_piercer_beam";
+            public const string shootSharpShooterBeam = prefix + "shoot_sharpshooter_beam";
+            public const string throwCoin = prefix  + "throw_coin";
+            
+        }
     }
 
     public static class Enemy
