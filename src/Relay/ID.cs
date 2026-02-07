@@ -48,7 +48,22 @@ public static class Id
         {
             public const string prefix = Player.prefix + "shotgun.";
             public const string shoot = prefix + "shoot";
-            public const string shootEject = prefix + "shoot_eject";
+            public const string shootSink = prefix + "shoot_sink";
+            public const string shootSaw = prefix + "shoot_saw";
+            public const string pumpLevel1 = prefix + "pump_level1";
+            public const string pumpLevel2 = prefix + "pump_level2";
+            public const string pumpLevel3 = prefix + "pump_level3";
+        }
+
+        public static class ShotgunHammer
+        {
+            public const string prefix = Player.prefix + "shotgun_hammer.";
+            public const string hit= prefix + "hit";
+            public const string throwNade = prefix + "throwNade";
+            public const string shootSaw = prefix + "shoot_saw";
+            public const string pumpLevel1 = prefix + "pump_level1";
+            public const string pumpLevel2 = prefix + "pump_level2";
+            public const string pumpLevel3 = prefix + "pump_level3";
         }
     }
 
