@@ -1,22 +1,17 @@
-using System.Collections.Generic;
 using HarmonyLib;
 
 using weluvsubtitle.Relay;
-using weluvsubtitle.TriggerHelper;
 using weluvsubtitle.Attributes;
 
-namespace weluvsubtitle.TriggerPatches.Player;
+namespace weluvsubtitle.TriggerPatches.Weapon;
 
 [PatchOnEntry]
 [HarmonyPatch(typeof(Railcannon))]
 public static class RailcannonPatch
 {
-    [HarmonyTranspiler]
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(Railcannon.Shoot))]
-    public static IEnumerable<CodeInstruction> ShootTranspiler(IEnumerable<CodeInstruction> instructions)
-        => ILHelper.WrapWithActionAtStart(instructions, AccessTools.Method(typeof(RailcannonPatch), nameof(ShootPatch)));
-
-    public static void ShootPatch(Railcannon __instance)
+    public static void ShootPrefix(Railcannon __instance)
     {
         switch (__instance.variation)
         {
@@ -37,8 +32,8 @@ public static class RailcannonPatch
 [HarmonyPatch(typeof(WeaponCharges))]
 public static class WeaponChargesPatch
 {
-    [HarmonyTranspiler]
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(WeaponCharges.PlayRailCharge))]
-    public static IEnumerable<CodeInstruction> PlayRailChargeTranspiler(IEnumerable<CodeInstruction> instructions)
-        => ILHelper.WrapWithPositionEmit(instructions, Id.Player.Railcannon.maxCharge);
+    public static void PlayRailChargePrefix(WeaponCharges __instance)
+        => EventRelay.Emit(Id.Player.Railcannon.maxCharge, __instance.transform.position);
 }

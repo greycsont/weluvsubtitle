@@ -14,13 +14,12 @@ namespace weluvsubtitle;
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BaseUnityPlugin
 {
-    internal static ManualLogSource log { get; private set; } = null;
         
     private void Awake()
     {
         // Plugin startup logic
-        log = base.Logger;
-        log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+        LogHelper.log = base.Logger;
+        LogHelper.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
         gameObject.hideFlags = HideFlags.DontSaveInEditor;
         LoadMainModule();
         PatchHarmony();
@@ -45,7 +44,7 @@ public class Plugin : BaseUnityPlugin
                 }
                 catch (Exception e)
                 {
-                    Plugin.log.LogError($"FUCK PATCHING {type.Name}, {e}");
+                    LogHelper.LogError($"FUCK PATCHING {type.Name}, {e}");
                     throw;
                 }
             }

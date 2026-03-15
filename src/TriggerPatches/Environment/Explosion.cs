@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using HarmonyLib;
 
-using weluvsubtitle.TriggerHelper;
 using weluvsubtitle.Relay;
 using weluvsubtitle.Attributes;
 
@@ -11,8 +9,8 @@ namespace weluvsubtitle.TriggerPatches.Environment;
 [HarmonyPatch(typeof(Explosion))]
 public static class ExplosionPatch
 {
-    [HarmonyTranspiler]
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(Explosion.Start))]
-    public static IEnumerable<CodeInstruction> StartTranspiler(IEnumerable<CodeInstruction> instructions)
-        => ILHelper.WrapWithPositionEmit(instructions, Id.Environment.explosion);
+    public static void StartPrefix(Explosion __instance)
+        => EventRelay.Emit(Id.Environment.explosion, __instance.transform.position);
 }

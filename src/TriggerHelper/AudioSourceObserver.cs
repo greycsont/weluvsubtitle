@@ -3,9 +3,6 @@ using weluvsubtitle.Relay;
 
 namespace weluvsubtitle.TriggerHelper;
 
-
-
-
 public class AudioPlayObserver : MonoBehaviour
 {
     public string id;
@@ -32,22 +29,20 @@ public class AudioPlayObserver : MonoBehaviour
 
     void Update()
     {
-        if (_audioSource is null && !_audioSource.isPlaying) return;
-        
-        if (!_wasPlaying
+        if (_audioSource == null) return;
+
+        bool isPlaying = _audioSource.isPlaying;
+
+        if (isPlaying && !_wasPlaying
             && Time.time - _lastTriggerTime >= _cooldown)
         {
             TriggerSignal();
-            _wasPlaying = true;
             _lastTriggerTime = Time.time;
         }
-        else
-        {
-            _wasPlaying = false;
-        }
+
+        _wasPlaying = isPlaying;
     }
 
     private void TriggerSignal()
         => EventRelay.Emit(id, transform.position);
-    
 }
