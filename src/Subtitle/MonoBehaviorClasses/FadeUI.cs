@@ -4,7 +4,6 @@ using TMPro;
 
 namespace weluvsubtitle.Subtitle.MonoBehaviorClasses;
 
-[RequireComponent(typeof(CanvasGroup))]
 public class FadeUI : MonoBehaviour
 {
     private float lifeTime = 3f;

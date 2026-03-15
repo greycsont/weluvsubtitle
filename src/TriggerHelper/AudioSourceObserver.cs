@@ -7,6 +7,7 @@ public class AudioPlayObserver : MonoBehaviour
 {
     public string id;
     private AudioSource _audioSource;
+    public bool isPlayerSource = false;
     private bool _wasPlaying = false;
     private float _lastTriggerTime;
     // 能超过这个cooldown的建议去打saragi
@@ -44,5 +45,8 @@ public class AudioPlayObserver : MonoBehaviour
     }
 
     private void TriggerSignal()
-        => EventRelay.Emit(id, transform.position);
+    {
+        var pos = isPlayerSource ? EventPos.Player : transform.position;
+        EventRelay.Emit(id, pos);
+    }
 }

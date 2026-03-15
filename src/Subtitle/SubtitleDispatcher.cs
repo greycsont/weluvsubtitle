@@ -11,6 +11,11 @@ public static class SubtitleDispatcher
     public static void ProcessSignal(string id, Vector3 pos = default)
     {
         SubtitleProvider.GetContent(id, out var text);
-        SubtitleDisplay.ShowSubtitle(text ?? id);
+
+        var label = EventPos.IsPlayer(pos)
+            ? string.Empty
+            : DirectionHelper.GetDirection(pos).ToLabel();
+
+        SubtitleDisplay.ShowSubtitle($"{label} {text ?? id}".TrimStart());
     }
 }

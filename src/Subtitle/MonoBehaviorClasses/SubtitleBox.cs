@@ -69,10 +69,11 @@ public class SubtitleBox : MonoBehaviour
     
     public void Initialize(string content, Action onDispose)
     {
-        this._textComponent.text = content;
-        this._onDispose =  onDispose;
+        if (_textComponent != null)
+            _textComponent.text = content;
+        _onDispose = onDispose;
     }
-    
+        
     private void OnDestroy()
         => _onDispose?.Invoke();
         

@@ -16,13 +16,13 @@ public static class RevolverPatch
         switch (shotType)
         {
             case 1:
-                EventRelay.Emit(Id.Player.Revolver.shootBeam, __instance.transform.position);
+                EventRelay.Emit(Id.Player.Revolver.shootBeam, EventPos.Player);
                 break;
             case 2:
                 if (__instance.gunVariation == 0)
-                    EventRelay.Emit(Id.Player.Revolver.shootPiercerBeam, __instance.transform.position);
+                    EventRelay.Emit(Id.Player.Revolver.shootPiercerBeam, EventPos.Player);
                 if (__instance.gunVariation == 2)
-                    EventRelay.Emit(Id.Player.Revolver.shootSharpShooterBeam, __instance.transform.position);
+                    EventRelay.Emit(Id.Player.Revolver.shootSharpShooterBeam, EventPos.Player);
                 break;
         }
     }

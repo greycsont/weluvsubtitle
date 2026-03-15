@@ -14,30 +14,30 @@ public static class RocketPatch
     [HarmonyPostfix]
     [HarmonyPatch(nameof(RocketLauncher.Start))]
     public static void PatchStart(RocketLauncher __instance)
-        => InjectHelper.InjectObserver(__instance.timerTickSound, Id.Player.Rocket.timeTicking);
+        => InjectHelper.InjectObserver(__instance.timerTickSound, Id.Player.Rocket.timeTicking, true);
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(RocketLauncher.Shoot))]
     public static void ShootPrefix(RocketLauncher __instance)
-        => EventRelay.Emit(Id.Player.Rocket.shoot, __instance.transform.position);
+        => EventRelay.Emit(Id.Player.Rocket.shoot, EventPos.Player);
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(RocketLauncher.ShootCannonball))]
     public static void ShootCannonballPrefix(RocketLauncher __instance)
-        => EventRelay.Emit(Id.Player.Rocket.shootCannonball, __instance.transform.position);
+        => EventRelay.Emit(Id.Player.Rocket.shootCannonball, EventPos.Player);
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(RocketLauncher.FreezeRockets))]
     public static void FreezeRocketsPrefix(RocketLauncher __instance)
-        => EventRelay.Emit(Id.Player.Rocket.freezeRockets, __instance.transform.position);
+        => EventRelay.Emit(Id.Player.Rocket.freezeRockets, EventPos.Player);
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(RocketLauncher.UnfreezeRockets))]
     public static void UnfreezeRocketsPrefix(RocketLauncher __instance)
-        => EventRelay.Emit(Id.Player.Rocket.unfreezeRockets, __instance.transform.position);
+        => EventRelay.Emit(Id.Player.Rocket.unfreezeRockets, EventPos.Player);
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(RocketLauncher.ShootNapalm))]
     public static void ShootNapalmPrefix(RocketLauncher __instance)
-        => EventRelay.Emit(Id.Player.Rocket.shootNapalm, __instance.transform.position);
+        => EventRelay.Emit(Id.Player.Rocket.shootNapalm, EventPos.Player);
 }

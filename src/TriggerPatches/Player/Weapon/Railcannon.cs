@@ -16,13 +16,13 @@ public static class RailcannonPatch
         switch (__instance.variation)
         {
             case 0:
-                EventRelay.Emit(Id.Player.Railcannon.shootElectric, __instance.transform.position);
+                EventRelay.Emit(Id.Player.Railcannon.shootElectric, EventPos.Player);
                 break;
             case 1:
-                EventRelay.Emit(Id.Player.Railcannon.shootHarpoon, __instance.transform.position);
+                EventRelay.Emit(Id.Player.Railcannon.shootHarpoon, EventPos.Player);
                 break;
             case 2:
-                EventRelay.Emit(Id.Player.Railcannon.shootMaliciousBeam, __instance.transform.position);
+                EventRelay.Emit(Id.Player.Railcannon.shootMaliciousBeam, EventPos.Player);
                 break;
         }
     }
@@ -35,5 +35,5 @@ public static class WeaponChargesPatch
     [HarmonyPrefix]
     [HarmonyPatch(nameof(WeaponCharges.PlayRailCharge))]
     public static void PlayRailChargePrefix(WeaponCharges __instance)
-        => EventRelay.Emit(Id.Player.Railcannon.maxCharge, __instance.transform.position);
+        => EventRelay.Emit(Id.Player.Railcannon.maxCharge, EventPos.Player);
 }

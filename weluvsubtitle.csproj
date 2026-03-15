@@ -10,7 +10,7 @@
     <RootNamespace>weluvsubtitle</RootNamespace>
     <UltrakillDir>E:/SteamLibrary/steamapps/common/ULTRAKILL/</UltrakillDir> <!-- Ensure that this has BepInEx installed -->
     <CopyToBepInExPluginsDir>true</CopyToBepInExPluginsDir>
-    
+    <NoWarn>CS0436</NoWarn>
     <RestoreAdditionalProjectSources>
       https://nuget.bepinex.dev/v3/index.json;
       https://nuget.samboy.dev/v3/index.json
